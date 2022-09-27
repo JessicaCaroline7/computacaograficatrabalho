@@ -6,6 +6,8 @@
 
 GLdouble move=0;
 GLdouble direcao=1;
+GLdouble mov=0;
+GLdouble direc=1;
 
 static void Init() 
 {                                 
@@ -29,11 +31,8 @@ static void Reshape(int width, int height)
   glViewport(0, 0, (GLsizei)width, (GLsizei)height);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(60.0, (GLfloat)width / (GLfloat)height, 1.00, 30.0);
-  // Perspective Parms( Angle, Aspect Ratio, Front Clipping, Back Clipping)
-
-  gluLookAt(0.0, 2.5, 3.0, 0.0, -1.5, -1.0, 0.0, 1.0, 0.0);
-  // LookAt Parms (Eye_X, Eye_Y, Eye_Z, View_X, View_Y, View_Z, Up_X, Up_Y, UpZ)
+  gluPerspective(60.0, (GLfloat)width / (GLfloat)height, 1.00, 30.0); // Perspectiva
+  gluLookAt(0.0, 2.5, 3.0, 0.0, -1.5, -1.0, 0.0, 1.0, 0.0); //Vizualização
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
@@ -48,7 +47,7 @@ static void display() {
   glPushMatrix();              		// Começa desenhar
     glRotatef( x,0.0,1.0,0.0);  	// Girar
     glColor3f(1.1, 0.96, 0.0);		// Cor Mostarda 1 0.86 0.35
-    glutSolidSphere(0.3,30,20);		// Desenha esfera
+    glutSolidSphere(0.25,30,20);		// Desenha esfera
     
     //Planeta 1
   glPushMatrix();
@@ -110,6 +109,15 @@ static void display() {
       glutSolidSphere(0.13,20,16);	  // Desenha planeta 2
       glPopMatrix();
       
+      //Planeta com anel
+       glPushMatrix();
+    glRotatef (x+0.08, 0.0, 1.0, 1.0);
+    glTranslatef(-1.0, 1.0, 0.8); 
+    glColor3f(0.82, 0.71, 0.55); //Cor canela
+    glutSolidTorus(0.01, 0.07, 9, 20); //Anel
+    glutSolidSphere(0.05, 20, 16); //Esfera
+    glPopMatrix();
+    
       //Planeta Anão
   glPushMatrix();	
       glRotatef( x+0.05,0.0,1.0,0.0);		  
@@ -121,89 +129,164 @@ static void display() {
         
   glPopMatrix();		      // Retornar a base
   
-  //Desenho de uma nave
-  
-    glLoadIdentity();
-    glRotatef(0.05,0.0,0.0,0.5);
-    glTranslatef(0.0,0.3,0.7);
+  //cometas - pequenas esferas que simulam cometas, em movimento.
   glPushMatrix();
-  glBegin(GL_POLYGON);
+      glRotatef (mov+0.4, 0.0, 1.0, 1.0);
+      glTranslatef(mov-6.9, move+8.6, 0.0);
+      glColor3f(0.41, 0.41, 0.41); //Cor cinza
+      glutSolidSphere(0.007, 5, 3);
+  glPopMatrix();
+  glPushMatrix();
+      glRotatef (mov+0.4, 0.0, 1.0, 1.0);
+      glTranslatef(mov-7.1, move+8.8, 0.0);
+      glColor3f(0.41, 0.41, 0.41); //Cor cinza
+      glutSolidSphere(0.006, 5, 3);
+  glPopMatrix();
+  glPushMatrix();
+      glRotatef (mov+0.4, 0.0, 1.0, 1.0);
+      glTranslatef(mov-7.3, move+8.7, 0.0);
+      glColor3f(0.41, 0.41, 0.41); //Cor cinza
+      glutSolidSphere(0.008, 5, 3);
+  glPopMatrix();
+  glPushMatrix();
+      glRotatef (mov+0.4, 0.0, 1.0, 1.0);
+      glTranslatef(mov-7.5, move+9.0, 0.0);
+      glColor3f(0.41, 0.41, 0.41); //Cor cinza
+      glutSolidSphere(0.009, 5, 3);
+  glPopMatrix();
+  glPushMatrix();
+      glRotatef (mov+0.4, 0.0, 1.0, 1.0);
+      glTranslatef(mov-7.7, move+8.9, 0.7);
+      glColor3f(0.41, 0.41, 0.41); //Cor cinza
+      glutSolidSphere(0.006, 5, 3);
+  glPopMatrix();
+  glPushMatrix();
+      glRotatef (mov+0.4, 0.0, 1.0, 1.0);
+      glTranslatef(mov-7.8, move+8.6, 0.0);
+      glColor3f(0.41, 0.41, 0.41); //Cor cinza
+      glutSolidSphere(0.009, 5, 3);
+  glPopMatrix();
+  glPushMatrix();
+      glRotatef (mov+0.4, 0.0, 1.0, 1.0);
+      glTranslatef(mov-7.6, move+8.8, 0.0);
+      glColor3f(0.41, 0.41, 0.41); //Cor cinza
+      glutSolidSphere(0.008, 5, 3);
+  glPopMatrix();
+  glPushMatrix();
+      glRotatef (mov+0.4, 0.0, 1.0, 1.0);
+      glTranslatef(mov-7.4, move+8.7, 0.0);
+      glColor3f(0.41, 0.41, 0.41); //Cor cinza
+      glutSolidSphere(0.006, 5, 3);
+  glPopMatrix();
+  glPushMatrix();
+      glRotatef (mov+0.4, 0.0, 1.0, 1.0);
+      glTranslatef(mov-7.2, move+9.0, 0.0);
+      glColor3f(0.41, 0.41, 0.41); //Cor cinza
+      glutSolidSphere(0.007, 5, 3);
+  glPopMatrix();
+  glPushMatrix();
+      glRotatef (mov+0.4, 0.0, 1.0, 1.0);
+      glTranslatef(mov-7.0, move+8.9, 0.0);
+      glColor3f(0.41, 0.41, 0.41); //Cor cinza
+      glutSolidSphere(0.008, 5, 3);
+  glPopMatrix();
   
-  glColor3f(0.75, 0.75, 0.75); //cinza claro
-  glVertex2f(move+1.75, move+1.77);
-  glVertex2f(move+1.85, move+1.78);
-  glColor3f(0.41, 0.41, 0.41); //cinza escuro
-  glVertex2f(move+1.75, move+1.73);
-  glVertex2f(move+1.7, move+1.78);
-  glColor3f(0.54, 0.17, 0.89); //azul violeta 
-  glVertex2f(move+1.75, move+1.80);
-  glVertex2f(move+1.85, move+1.78);
+  //Desenho de uma nave 
+  glLoadIdentity(); //Iniciar o desenho
+  glRotatef(0.05,0.0,0.0,0.5);
+  glTranslatef(0.0,0.3,0.7);
+  glPushMatrix();
+  glBegin(GL_POLYGON); //Desenhar poligno
   
-  glEnd();
+  glColor3f(0.75, 0.75, 0.75); //Cinza claro
+  glVertex2f(move+1.90, move+1.91);
+  glVertex2f(move+2.00, move+1.94);
+  glColor3f(0.41, 0.41, 0.41); //Cinza escuro
+  glVertex2f(move+1.90, move+1.89);
+  glVertex2f(move+1.85, move+1.92);
+  glColor3f(0.54, 0.17, 0.89); //Azul violeta 
+  glVertex2f(move+1.90, move+1.94);
+  glVertex2f(move+2.00, move+1.94);
+  
+  glEnd(); //Finalizar o desenho
   
   // Nave Inimiga
-  
-  glLoadIdentity();
-    glRotatef(0.05,0.0,0.0,0.5);
-    glTranslatef(0.0,0.3,0.7);
+  glLoadIdentity(); //Iniciar o desenho
+  glRotatef(0.05,0.0,0.0,0.5);
+  glTranslatef(0.0,0.3,0.7);
   glPushMatrix();
-  glBegin(GL_POLYGON);
+  glBegin(GL_POLYGON); //Desenhar um poligno
   
-  //glColor3f(0.55,0.0,0.0);
   glColor3f(0.75, 0.75, 0.75); //cinza claro
-  glVertex2f(move+2.08, move+2.03);
-  glVertex2f(move+2.03, move+2.08);
+  glVertex2f(move+2.23, move+2.18);
+  glVertex2f(move+2.18, move+2.23);
   
   glColor3f(0.5, 0.5, 0.5); //cinza
-  glVertex2f(move+2.03, move+2.11);
-  glVertex2f(move+2.08, move+2.16);
-  
-  //glColor3f(0.55,0.0,0.0);//vermelho escuro 
-  glVertex2f(move+2.08, move+2.15);
-  glVertex2f(move+2.08, move+2.08);
-  glVertex2f(move+2.15, move+2.08);
-  glVertex2f(move+2.11, move+2.11);
+  glVertex2f(move+2.18, move+2.26);
+  glVertex2f(move+2.23, move+2.31); 
+  glVertex2f(move+2.23, move+2.30);
+  glVertex2f(move+2.23, move+2.23);
+  glVertex2f(move+2.30, move+2.23);
+  glVertex2f(move+2.26, move+2.26);
   
   glColor3f(0.75, 0.75, 0.75);//cinza claro
-  glVertex2f(move+2.11, move+2.16);
-  glVertex2f(move+2.14, move+2.11);
-  
-  glColor3f(0.55,0.0,0.0);
-  //glColor3f(0.5, 0.5, 0.5); //cinza
-  glVertex2f(move+2.14, move+2.08);
-  glVertex2f(move+2.11, move+1.98);
-  glEnd();
-  
-  
+  glVertex2f(move+2.26, move+2.31);
+  glVertex2f(move+2.29, move+2.26);
+
+  glColor3f(0.55, 0.0, 0.0); //vermelho escuro
+  glVertex2f(move+2.29, move+2.23);
+  glVertex2f(move+2.26, move+2.13);
+  glEnd(); //Finalizar o desenho
+   
   glFlush();			      
-  glutSwapBuffers();		      // Swap buffers
+  glutSwapBuffers();		      // Swap de buffers
   glutPostRedisplay();		      // Mostrar os resultados
 }
-void nave(int passo)
+
+void nave(int passo) // Função de movimento com tempo
 {
-if(direcao==1)
+  if(direcao==1)
+  {
+     move -= 0.1;
+     if(move==1) 
+     direcao = 0;
+   }
+
+  else
+  {
+    move += 0.1;
+    if(move==+2) 
+    direcao = 1;
+  }
+  glutPostRedisplay();
+  glutTimerFunc(250,nave, 1);
+
+}
+void cometa(int passo) //Função de movimento com tempo
 {
-   move -= 0.1;
-   if(move==1) 
-   direcao = 0;
+  if(direc==1)
+  {
+     mov += 0.1;
+     if(mov==1) 
+     direc = 0;
+   }
+
+  else
+  {
+    mov -= 0.1;
+    if(mov==+2) 
+    direc = 1;
+  }
+  glutPostRedisplay();
+  glutTimerFunc(250,cometa, 1);
+
 }
 
-else
-{
-  move += 0.1;
-  if(move==+2) 
-  direcao = 1;
-}
-glutPostRedisplay();
-glutTimerFunc(150,nave, 1);
-
-}
-
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y) //Função de tecla
 {
   switch (key) 
   {
-    case 27:
+    case 27: //Tecla ESC
 	  exit(0);
 	break;
   }
@@ -212,16 +295,17 @@ int main(int argc, char** argv)
 {	
   glutInit(&argc,argv);  
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH ); // Inicializa modos
-  glutInitWindowSize( 950, 650);
-  glutInitWindowPosition( 50, 50);
-  glutCreateWindow( "Sistema Planetário"); 
+  glutInitWindowSize( 950, 650); //Tamanho da janela
+  glutInitWindowPosition( 50, 50); //Posição dentro da janela
+  glutCreateWindow( "Espaço"); //Nome da janela
   Init();
-  glClearColor(0.0,0.0,0.0,0.0);
+  glClearColor(0.0,0.0,0.0,0.0); //Cor do fundo
   
-  glutDisplayFunc(display);
-  glutTimerFunc(150,nave,1);
+  glutDisplayFunc(display); //Chama a função Display
+  glutTimerFunc(250,cometa,1); //Chama a função de movimento
+  glutTimerFunc(250,nave,1); //Chama a função de movimento
   glutReshapeFunc(Reshape);
-  glutKeyboardFunc(keyboard);
-  glutMainLoop();
+  glutKeyboardFunc(keyboard); //Chama a função de teclado
+  glutMainLoop(); //Loop na Main
   return 0;
 }
